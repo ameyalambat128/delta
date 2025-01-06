@@ -1,4 +1,4 @@
-# Delta : Advanced Options Pricing and Analytics Platform
+# Delta
 
 Delta is a cutting-edge **Options Pricing and Analytics Platform** designed to provide accurate, real-time options pricing and comprehensive analytics. Built on robust financial models like **Cox-Ross-Rubinstein (CRR)** and **Least-Squares Monte Carlo (LSMC)**, Delta aims to empower traders, analysts, and financial enthusiasts with precise insights into the world of options trading.
 
