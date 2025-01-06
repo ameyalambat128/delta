@@ -1,4 +1,5 @@
 import numpy as np
+from datetime import datetime
 
 
 class CRRBinomialOptionPricing:
@@ -10,7 +11,7 @@ class CRRBinomialOptionPricing:
         self.sigma = sigma  # Volatility (from yfinance)
         self.n = n  # Number of time steps
         self.option_type = option_type.lower()  # 'call' or 'put'
-        self.american = american  # American or European option
+        self.american = american  # American or European option boolean
 
         # Time step
         self.dt = self.T / self.n
@@ -20,6 +21,70 @@ class CRRBinomialOptionPricing:
         # Risk-neutral probability
         self.p = (np.exp(self.r * self.dt) - self.d) / (self.u - self.d)
         self.one_minus_p = 1 - self.p
+
+    @property
+    def S(self):
+        return self._S
+
+    @S.setter
+    def S(self, value):
+        self._S = value
+
+    @property
+    def K(self):
+        return self._K
+
+    @K.setter
+    def K(self, value):
+        self._K = value
+
+    @property
+    def T(self):
+        return self._T
+
+    @T.setter
+    def T(self, value):
+        self._T = value
+
+    @property
+    def r(self):
+        return self._r
+
+    @r.setter
+    def r(self, value):
+        self._r = value
+
+    @property
+    def sigma(self):
+        return self._sigma
+
+    @sigma.setter
+    def sigma(self, value):
+        self._sigma = value
+
+    @property
+    def n(self):
+        return self._n
+
+    @n.setter
+    def n(self, value):
+        self._n = value
+
+    @property
+    def option_type(self):
+        return self._option_type
+
+    @option_type.setter
+    def option_type(self, value):
+        self._option_type = value.lower()
+
+    @property
+    def american(self):
+        return self._american
+
+    @american.setter
+    def american(self, value):
+        self._american = value
 
     def build_stock_price_tree(self):
         stock_price = self.S * \
@@ -97,11 +162,14 @@ class CRRBinomialOptionPricing:
 # Example Usage
 if __name__ == '__main__':
     # Example using hardcoded values from yfinance
-    S = 243  # Current stock price from yfinance
-    K = 210  # Strike price from yfinance
-    T = 0.5  # Time to maturity in years from yfinance
+    S = 243.54  # Current stock price from yfinance
+    K = 230  # Strike price from yfinance
+    today = datetime(2025, 1, 6)
+    expiration = datetime(2025, 3, 21)
+    # Time to maturity in years from yfinance
+    T = (expiration - today).days / 365
     r = 0.05  # Risk-free rate from yfinance
-    sigma = 0.378  # IV from yfinance
+    sigma = 0.2495  # IV from yfinance
     n = 200  # Number of time steps
 
     option_pricing = CRRBinomialOptionPricing(
