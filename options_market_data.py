@@ -32,6 +32,62 @@ class YFinanceOptionsData:
         self.calls_data = self._extract_option_data(self.calls)
         self.puts_data = self._extract_option_data(self.puts)
 
+    @property
+    def ticker(self):
+        return self._ticker
+
+    @ticker.setter
+    def ticker(self, value):
+        self._ticker = value
+
+    @property
+    def expiration_date(self):
+        return self._expiration_date
+
+    @expiration_date.setter
+    def expiration_date(self, value):
+        self._expiration_date = value
+
+    @property
+    def current_price(self):
+        return self._current_price
+
+    @current_price.setter
+    def current_price(self, value):
+        self._current_price = value
+
+    @property
+    def risk_free_rate(self):
+        return self._risk_free_rate
+
+    @risk_free_rate.setter
+    def risk_free_rate(self, value):
+        self._risk_free_rate = value
+
+    @property
+    def time_to_maturity(self):
+        return self._time_to_maturity
+
+    @time_to_maturity.setter
+    def time_to_maturity(self, value):
+        self._time_to_maturity = value
+
+    @property
+    def calls_data(self):
+        return self._calls_data
+
+    @calls_data.setter
+    def calls_data(self, value):
+        self._calls_data = value
+
+    @property
+    def puts_data(self):
+        return self._puts_data
+
+    @puts_data.setter
+    def puts_data(self, value):
+        self._puts_data = value
+
     def _extract_option_data(self, options_df):
         data = []
         for _, row in options_df.iterrows():
@@ -57,7 +113,8 @@ class YFinanceOptionsData:
 
     def display_calls(self):
         print("\nCall Options Data:")
-        print(self.calls_data.to_string(index=False))
+        # print(self.calls_data.to_string(index=False))
+        print(self._extract_option_data(self.calls))
 
     def display_puts(self):
         print("\nPut Options Data:")
@@ -69,5 +126,6 @@ if __name__ == '__main__':
     ticker = 'AAPL'
     expiration_date = '2025-01-31'
     options_data = YFinanceOptionsData(ticker, expiration_date)
+
     options_data.display_calls()
-    options_data.display_puts()
+    # options_data.display_puts()
